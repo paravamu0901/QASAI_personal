@@ -1,0 +1,15 @@
+.Sidebar{
+    text-align: left;
+    width: 10%;
+    .menu-items{
+        margin: 55px  0px 0px 25px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+    .menu-items:hover{
+        background-color: rgb(248, 245, 245);
+        border: 1px solid whitesmoke;
+        border-radius: 10px;
+        text-align: center;
+    }
+}

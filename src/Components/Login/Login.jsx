@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../Images/logo.png";
+import { useHistory } from "react-router-dom";
 import "./Login.scss";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [checked, isCheckedvalue] = useState(false);
+  // const [loggedin, isloggedin] = useState(false);
+  const History = useHistory();
 
   useEffect(() => {
-    console.log(username, password);
-  }, [username, password]);
+    console.log(username, password, checked);
+  }, [username, password, checked]);
 
   const handleclick = () => {
-    console.log(username, password);
+    let val = true;
+    console.log(username, password, checked);
+    if (username === "") {
+      alert("Please provide a username or email");
+      val = false;
+    } else if (password === "") {
+      alert("Please provide a valid password");
+      val = false;
+    } else if (checked === false) {
+      alert("Please accept the terms and conditions");
+      val = false;
+    }
+    if (val === true) {
+      // isloggedin(true);
+      History.push("/dashboard");
+    }
   };
 
   return (
@@ -38,18 +57,23 @@ const Login = () => {
             <input
               type="text"
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter Username"
+              placeholder="  Enter Username"
             />
           </div>
           <div className="componentPassword">
             <input
               type="password"
-              placeholder="Enter Password"
+              placeholder="  Enter Password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="componentTermsandconditions">
-            <input style={{marginRight:"10px"}} type="checkbox" />I agree with the terms and conditions
+            <input
+              style={{ marginRight: "10px" }}
+              onClick={(e) => isCheckedvalue(!checked)}
+              type="checkbox"
+            />
+            I agree with the terms and conditions
           </div>
           <div className="componentSignin">
             <button onClick={handleclick}>Sign in</button>
