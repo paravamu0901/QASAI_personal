@@ -1,0 +1,14 @@
+.Admin {
+  .AdminHeader {
+    display: flex;
+    justify-content: space-around;
+  }
+  .tableComponent {
+    display: -webkit-inline-box;
+    width: 75%;
+    margin-top: 10vh;
+  }
+  .WelcomeText {
+    font-size: 20px;
+  }
+}

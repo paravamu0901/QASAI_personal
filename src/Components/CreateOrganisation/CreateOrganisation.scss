@@ -1,0 +1,14 @@
+.CreateOrganisation {
+    margin-top: 30px;
+    button {
+      height: 35px;
+      font-size: 20px;
+      background-color: #59697e;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover{
+        border: 3px solid black;    
+    }
+  }

@@ -1,0 +1,12 @@
+.Dashboard {
+  .Seperator {
+    display: flex;
+    .Side {
+        width: 20%;
+    }
+    .displayed{
+        width: 90%;
+        align-self: center;
+    }
+  }
+}
