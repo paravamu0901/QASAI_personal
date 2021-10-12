@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Admin.scss";
-import { Table } from "react-bootstrap";
+import { Table, Modal, Button } from "react-bootstrap";
 import CreateOrganisation from "../CreateOrganisation/CreateOrganisation";
 import { BsEye } from "react-icons/bs";
 
@@ -16,11 +16,44 @@ const Admin = (props) => {
   const [allinstitutions, setAllInstitutions] = useState([]);
   const date = new Date();
 
-  let counter = 0;
+  //For Users
+  const [userShow, setUserShow] = useState(false);
+  const handleUserClose = () => setUserShow(false);
+  const handleUserShow = () => setUserShow(true);
 
   useEffect(() => {
     console.log(allinstitutions.length);
   }, [allinstitutions]);
+
+  const exampleData = {
+    account_id: "259164b6-4f23-442a-b449-caf53712b41d",
+    account_name: "Qas.aii1",
+    created_at: "2021-10-11T15:33:44.558113Z",
+    modified_at: "2021-10-11T15:33:44.558134Z",
+    users: [
+      {
+        user_id: "555182fc-0a07-496a-bc8e-f75ffe81d4e8",
+        first_name: "Frank",
+        last_name: "Zylker",
+        email_id: "zylker.frank@gmail.com",
+        status: 0,
+      },
+      {
+        user_id: "555182fc-0a07-496a-bc8e-f75ffe81d4e8",
+        first_name: "Bruce",
+        last_name: "Wayne",
+        email_id: "bruce.wayne@wayneINC.com",
+        status: 1,
+      },
+      {
+        user_id: "555182fc-0a07-496a-bc8e-f75ffe81d4e8",
+        first_name: "Tom",
+        last_name: "Holland",
+        email_id: "tom.holland@starkind.com",
+        status: 0,
+      },
+    ],
+  };
 
   const handleSubmit = () => {
     let institutionObj = {};
@@ -71,15 +104,61 @@ const Admin = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {allinstitutions.map((institution) => {
+                {allinstitutions.map((institution, index) => {
                   return (
                     <tr key={Math.random()}>
-                      <td>{counter++}</td>
+                      <td>{index}</td>
                       <td>{institution.account_name}</td>
                       <td>{institution.owner_name}</td>
                       <td>{institution.email_id}</td>
                       <td>
-                        <BsEye />
+                        <BsEye onClick={handleUserShow} />
+                        <Modal
+                          size="lg"
+                          show={userShow}
+                          onHide={handleUserClose}
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>Users in Institution: @UB</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <div style={{marginBottom:"20px"}}>
+                              <Button variant="secondary">Add User</Button>
+                            </div>
+                            <div>
+                              <Table striped bordered hover>
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Org Name</th>
+                                    <th>Full Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email ID</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {allinstitutions.map((institution, index) => {
+                                    return (
+                                      <tr key={Math.random()}>
+                                        <td>{index}</td>
+                                        <td>{institution.account_name}</td>
+                                        <td>{institution.owner_name}</td>
+                                        <td>{institution.owner_last_name}</td>
+                                        <td>{institution.email_id}</td>
+                                        <td>Onboard</td>
+                                        <td>
+                                          <BsEye onClick={handleUserShow} />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                                </tbody>
+                              </Table>
+                            </div>
+                          </Modal.Body>
+                        </Modal>
                       </td>
                     </tr>
                   );
